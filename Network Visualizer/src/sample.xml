@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Router>
+    <ID>10.25.2.14</ID>
+    <Interface IP="10.10.10.10">
+        <Interface:Netmask>255.255.255.0</Interface:Netmask>
+        <Inerface:OSPFAreaID>10.25.0.0</Inerface:OSPFAreaID>
+        <Route Route="10.25.4.0">
+            <Route:NetMask>255.255.255.0</Route:NetMask>
+            <Route:NextHop>192.168.1.1</Route:NextHop>
+        </Route>
+    </Interface>
+</Router>
