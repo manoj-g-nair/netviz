@@ -131,7 +131,7 @@ def ScanNet(object):
 #Recursion is only for testing algoritm
 #We need to implement multithreading with queues
 #Number of threads needs to be calculated from number of CPU
-#We get first router in queue, return neighbors, put them in queue and so on
+#We have first router in queue, return neighbors, put them in queue and so on
 # threads get neighbors from queue and get all information
 #!!!!!! we need to analyze, if router was already in queue 
 def recurScan(dict, id):
