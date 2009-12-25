@@ -14,6 +14,7 @@ import netsnmp
 import re
 import ConfigParser
 import sys
+import json
 # netsnmp - for class snmpSession
 # re - for def ScanNet, for identifying device vendor
 # ConfigParser - for def ScanNet (for oids) and for main to get configuration
@@ -127,26 +128,25 @@ def ScanNet(object):
     #Return our hash
     return RoutResult
 
+def recurScan(dict, id):
+    if dict.has_key(id):
+        pass
+    else:
+        dict[id] = ScanNet(id)
+        for neigh in dict[id]['OSPFNeighbors'].keys():
+            recurScan(dict, neigh)
+    return dict
+
+
 #Main program starting
 def main():
-    temp ={}
     dfsw1 = '10.25.2.14'
-    temp[dfsw1] = ScanNet(dfsw1)
-    #NEED RECURSION HERE
-    for neigh in temp[dfsw1]['OSPFNeighbors'].keys():
-        temp[neigh] = ScanNet(neigh)
-        for neigh2 in temp[neigh]['OSPFNeighbors'].keys():
-            if temp.has_key(neigh2):
-                continue
-            else:
-                temp[neigh2] = ScanNet(neigh2)
-                for neigh3 in temp[neigh2]['OSPFNeighbors'].keys():
-                    if temp.has_key(neigh3):
-                        continue
-                    else:
-                        temp[neigh3] = ScanNet(neigh3)
+    temp = {}
+    temp = recurScan(temp, dfsw1)
     for i in temp.keys():
-        print i, temp[i]['sysName'], temp[i]
+        print temp[i]['sysName'],
+    print len(temp.keys())
+        
                                            
 # Default value start main program
 if __name__ == "__main__":
