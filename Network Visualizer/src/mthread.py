@@ -134,6 +134,7 @@ def ScanNet(object):
 #We have first router in queue, return neighbors, put them in queue and so on
 # threads get neighbors from queue and get all information
 #!!!!!! we need to analyze, if router was already in queue 
+# http://www.artfulcode.net/articles/multi-threading-python/
 def recurScan(dict, id):
     if dict.has_key(id):
         pass
