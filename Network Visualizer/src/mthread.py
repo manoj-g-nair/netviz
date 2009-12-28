@@ -14,7 +14,7 @@ import netsnmp
 import re
 import ConfigParser
 import sys
-import json
+import time
 # netsnmp - for class snmpSession
 # re - for def ScanNet, for identifying device vendor
 # ConfigParser - for def ScanNet (for oids) and for main to get configuration
@@ -147,12 +147,14 @@ def recurScan(dict, id):
 
 #Main program starting
 def main():
+    startTime = time.time()
     dfsw1 = '10.25.2.14'
     temp = {}
     temp = recurScan(temp, dfsw1)
     for i in temp.keys():
         print temp[i]['sysName'],
-    print len(temp.keys())
+    print "\n", len(temp.keys())
+    print "Elapsed Time: %s" % (time.time() - startTime)
         
                                            
 # Default value start main program
